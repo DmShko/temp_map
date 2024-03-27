@@ -1,22 +1,25 @@
 import { useState, useEffect, FC, FormEvent } from "react";
 
 // own dispatch hook
-import { useAppDispatch } from '../../app.hooks'
+import { useAppDispatch, useAppSelector } from '../../app.hooks'
 import { useFormik } from 'formik';
 
 // styles
 import gm from "./GenerateMapStyles.module.scss";
 
-import putData from "../../API/putData";
+import postData from "../../API/postData";
 
 const GenerateMap: FC = () => {
 
-  const [ file, setFile ] = useState<{table: string}>();
+  const [ file, setFile ] = useState<{table: string, file?: File}>();
+
+  const selectorIsUpload = useAppSelector(state => state.isUpload);
+ 
   const dispatch = useAppDispatch();
   
   useEffect(() => {
 
-    if(file)  dispatch(putData(file));
+    if(file)  dispatch(postData(file));
 
   }),[file];
 
@@ -30,7 +33,7 @@ const GenerateMap: FC = () => {
     //! 'values' contains ended values all Form inputs.
     //! They will can get: 'values.<field name>' or change values on {value1, value2...}
     onSubmit: ( values ) => {
-
+      
       setFile(values);
     
     },
@@ -38,24 +41,28 @@ const GenerateMap: FC = () => {
 
   const handleHange = (evt: FormEvent<HTMLInputElement>) => {
     if (evt.currentTarget.files) {
-      formik.setFieldValue("zip", evt.currentTarget.files[0]);
+      formik.setFieldValue("file", evt.currentTarget.files[0]);
     }
   };
 
   return (
-    <div className={gm.container}>
-      <input
-        type="file"
-        name="table"
-        // supported file types here,
-        accept="zip"
-        onChange={handleHange}
-      />
+    <>
+      <div className={gm.dashboardContainer}>
+        <input
+          type="file"
+          name="table"
+          accept=".zip"
+          onChange={handleHange}
+        />
 
-      <button type="submit" onClick={() => formik.handleSubmit()}>
-        submit
-      </button>
-    </div>
+        <button type="submit" onClick={() => formik.handleSubmit()} disabled={Object.keys(formik.values).find(element => element === 'file') === undefined ? true: false}>
+          submit
+        </button>
+      </div>
+      <div className={gm.mapContainer}>
+        <img src='http://localhost:3000/map/map.jpg' alt='image of world ocean temparature'></img>
+      </div>
+    </>
   );
 };
 

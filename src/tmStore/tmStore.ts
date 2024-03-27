@@ -2,31 +2,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import Notiflix from 'notiflix';
 
-import putData from '../API/putData';
-
-// type for one pill element
-interface Pill {
-    name?: string
-    id: string
-    status?: boolean
-    prescription?: string
-    quality?: number
-    perDay?: number
-    duration?: number
-    description?: string
-};
+// API function
+import postData from '../API/postData';
 
 // type for itialState
 interface TmInitialState {
-  pills: Pill[]
+  isUpload: boolean
   isLoading: boolean
 };
 
 const tmInitialState: TmInitialState = {
 
-  pills: [],
+  isUpload: false,
   isLoading: false,
- 
+
 };
 
 const tmSlice = createSlice({
@@ -34,41 +23,35 @@ const tmSlice = createSlice({
     initialState: tmInitialState,
     reducers: {
 
-        changePills(state, action: PayloadAction<Pill>) {
-            switch (action.type) {
-              case 'clearPills':
-                state.pills = [];
-                break;
-              case 'addPill':       
-                state.pills = [...state.pills, action.payload];
-                break;
-              case 'deletePill':
-                state.pills = state.pills.filter(element => element.id !== action.payload.id);
-                break;
-              default: break;
-            }
-        },
-        
     },
 
     extraReducers: 
 
     builder => {
 
-      builder.addCase(putData.pending, (state) => {
+      /**####################################### post ########################################### */
+
+      builder.addCase(postData.pending, (state) => {
         state.isLoading = true; 
       });
             
-      builder.addCase(putData.fulfilled, (state) => {
+      builder.addCase(postData.fulfilled, (state, action: PayloadAction<number>) => {
 
         state.isLoading = false;
+
+        if(action.payload === 201) {
+
+          state.isUpload = true;
+          Notiflix.Notify.success('File uploaded successfully', {width: '450px', position: 'center-top', fontSize: '24px',});
+
+        };
         
       });
             
-      builder.addCase(putData.rejected, (state, action) => {
+      builder.addCase(postData.rejected, (state, action) => {
                     
         state.isLoading = false;
-      
+    
         Notiflix.Notify.warning(`${action.payload}`, {width: '450px', position: 'center-top', fontSize: '24px',});
         
       });
@@ -78,7 +61,7 @@ const tmSlice = createSlice({
     }
 );
 
-export const {
-    changePills
-} = tmSlice.actions;
+// export const {
+//     changePills
+// } = tmSlice.actions;
 export default tmSlice.reducer;
