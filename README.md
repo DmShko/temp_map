@@ -13,6 +13,9 @@ The server is located at Render.com.
 - Green - more than 20
 -Turquoise - more than 10
 -Blue - from 0 to 10 degrees Celsius.
+
+Resault:
+![My Image](public/temp_map.jpg)
  
 The project was developed by Dmytro Dhevchenko.
 https://github.com/DmShko
