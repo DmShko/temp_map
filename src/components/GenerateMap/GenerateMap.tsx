@@ -13,7 +13,7 @@ const GenerateMap: FC = () => {
 
   const [ file, setFile ] = useState<{table: string, file?: File}>();
 
-  const selectorIsUpload = useAppSelector(state => state.isUpload);
+  const selectorFileName = useAppSelector(state => state.fileName);
  
   const dispatch = useAppDispatch();
   
@@ -60,7 +60,7 @@ const GenerateMap: FC = () => {
         </button>
       </div>
       <div className={gm.mapContainer}>
-        <img src='http://localhost:3000/map/map.jpg' alt='image of world ocean temparature'></img>
+        <img src={selectorFileName !== '' ? `https://temp-map-server.onrender.com/map/${selectorFileName}` : 'https://temp-map-server.onrender.com/map/map.jpg'} alt='image of world ocean temparature'></img>
       </div>
     </>
   );

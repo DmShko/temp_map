@@ -7,14 +7,20 @@ import postData from '../API/postData';
 
 // type for itialState
 interface TmInitialState {
-  isUpload: boolean
+  
   isLoading: boolean
+  fileName: string,
 };
+
+interface Res {
+  status: number
+  path: string
+}
 
 const tmInitialState: TmInitialState = {
 
-  isUpload: false,
   isLoading: false,
+  fileName: '',
 
 };
 
@@ -32,16 +38,16 @@ const tmSlice = createSlice({
       /**####################################### post ########################################### */
 
       builder.addCase(postData.pending, (state) => {
-        state.isLoading = true; 
+        state.isLoading = false; 
       });
             
-      builder.addCase(postData.fulfilled, (state, action: PayloadAction<number>) => {
+      builder.addCase(postData.fulfilled, (state, action: PayloadAction<Res>) => {
 
-        state.isLoading = false;
+        state.isLoading = true;
 
-        if(action.payload === 201) {
+        if(action.payload.status === 201) {
 
-          state.isUpload = true;
+          state.fileName = action.payload.path;
           Notiflix.Notify.success('File uploaded successfully', {width: '450px', position: 'center-top', fontSize: '24px',});
 
         };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://temp-map-server.onrender.com';
 
 const postData = createAsyncThunk(
     'tmStorage/putData', 
@@ -11,9 +11,8 @@ const postData = createAsyncThunk(
         if(data.file) newData.append('file', data.file); 
      
         return await axios.post('/api/temps', newData).then((responce) => {
-     
-            return responce.status;
-            
+           
+            return {status: responce.status, path: responce.data.path};
         })
         .catch((error) => {
 
