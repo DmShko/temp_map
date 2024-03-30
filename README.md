@@ -5,6 +5,8 @@ This project allows you to see the temperature of the global ocean at any point 
 Ocean temperature data, after downloading, goes to the server, which is implemented here:
 https://github.com/DmShko/temp_map_server.
 
+The server is located at Render.com.
+
  There, the data is processed, as a result of which a new photo is created with temperature zones highlighted in a certain color.
 - Red - > 35 degrees Celsius.
 -Orange - 30 degrees Celsius.
