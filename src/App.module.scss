@@ -60,4 +60,19 @@ header {
   }
 
 }
-  
+
+.footerContainer {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    
+    
+    .title {
+        width: fit-content;
+       
+        margin: 0;
+    }
+  }  

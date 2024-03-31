@@ -16,8 +16,8 @@ const App = () =>  {
         <main>
           <GenerateMap />
         </main>
-        <footer>
-
+        <footer className={g.footerContainer}>
+            <p className={g.title}>2024</p>
         </footer>
     </>
    
