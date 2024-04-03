@@ -18,8 +18,7 @@ const GenerateMap: FC = () => {
 
   useEffect(() => {
     if (file) dispatch(postData(file));
-  }),
-    [file];
+  }),[file];
 
   // create 'formik' hook and configurate him
   const formik = useFormik({
@@ -44,7 +43,7 @@ const GenerateMap: FC = () => {
     <>
       <div className={gm.dashboardContainer}>
         <input type="file" name="table" accept=".zip" onChange={handleHange} />
-
+        
         <button
           type="submit"
           onClick={() => formik.handleSubmit()}
@@ -58,12 +57,13 @@ const GenerateMap: FC = () => {
           submit
         </button>
       </div>
+
       <div className={gm.mapContainer}>
         <img
           src={
             selectorFileName !== ""
-              ? `https://temp-map-server.onrender.com/map/${selectorFileName}`
-              : "https://temp-map-server.onrender.com/map/map.jpg"
+              ? `http://localhost:3000/map/${selectorFileName}`
+              : "http://localhost:3000/map/map.jpg"
           }
           alt="image of world ocean temparature"
         ></img>

@@ -56,7 +56,7 @@ const tmSlice = createSlice({
             
       builder.addCase(postData.rejected, (state, action) => {
                     
-        state.isLoading = false;
+        state.isLoading = true;
     
         Notiflix.Notify.warning(`${action.payload}`, {width: '450px', position: 'center-top', fontSize: '24px',});
         
