@@ -33,6 +33,7 @@ const GenerateMap: FC = () => {
     },
   });
 
+  // load file
   const handleHange = (evt: FormEvent<HTMLInputElement>) => {
     if (evt.currentTarget.files) {
       formik.setFieldValue("file", evt.currentTarget.files[0]);
@@ -62,8 +63,8 @@ const GenerateMap: FC = () => {
         <img
           src={
             selectorFileName !== ""
-              ? `http://temp-map-server.onrender.com/${selectorFileName}`
-              : "https://temp-map-server.onrender.com/map.jpg"
+              ? `http://localhost:3000/map/${selectorFileName}`
+              : "http://localhost:3000/map/map.jpg"
           }
           alt="image of world ocean temparature"
         ></img>
