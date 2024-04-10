@@ -17,5 +17,5 @@ The server is located at Render.com.
 Result:
 ![My Image](public/temp_map.jpg)
  
-The project was developed by Dmytro Dhevchenko.
+The project was developed by Dmytro Shevchenko.
 https://github.com/DmShko
