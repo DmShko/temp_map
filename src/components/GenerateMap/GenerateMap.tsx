@@ -63,8 +63,8 @@ const GenerateMap: FC = () => {
         <img
           src={
             selectorFileName !== ""
-              ? `http://localhost:3000/map/${selectorFileName}`
-              : "http://localhost:3000/map/map.jpg"
+              ? `http://temp-map-server.onrender.com/${selectorFileName}`
+              : "https://temp-map-server.onrender.com/map.jpg"
           }
           alt="image of world ocean temparature"
         ></img>
